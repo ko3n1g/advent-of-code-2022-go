@@ -5,5 +5,8 @@
     "code-runner.executorMapByGlob": {
         "$dir/*.go": "go"
     },
-    
+    "go.lintTool": "golangci-lint",
+    "go.lintFlags": [
+    "--fast"
+    ]
 }
