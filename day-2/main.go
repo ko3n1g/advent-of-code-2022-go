@@ -2,25 +2,10 @@ package main
 
 import (
 	"fmt"
-	"os"
 	"strings"
+
+	"github.com/ko3n1g/advent-of-code-2022-go/tools"
 )
-
-func getData(fileName string) []string {
-	currPath, err := os.Getwd()
-
-	if err != nil {
-		panic(err)
-	}
-
-	file, err := os.ReadFile(currPath + "/data/" + fileName)
-
-	if err != nil {
-		panic(err)
-	}
-
-	return strings.Split(string(file), "\n")
-}
 
 func computeScore(game []string) int {
 	var score int
@@ -49,7 +34,7 @@ func computeScore(game []string) int {
 
 func main() {
 
-	data := getData("challenge.txt")
+	data := tools.GetData("challenge.txt")
 
 	// Compute score
 	var score int = computeScore(data)

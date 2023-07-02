@@ -2,11 +2,13 @@ package main
 
 import (
 	"fmt"
+
+	"github.com/ko3n1g/advent-of-code-2022-go/tools"
 )
 
 func main() {
 
-	data := getData("challenge.txt")
+	data := tools.GetData("challenge.txt")
 
 	// Solve Part 1
 	var sumOfPriorities int = computeSumOfAllRucksackPriorities(data)

@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	var path string = "/home/okoenig/private_code_projects/advent-of-code-2022-go/data/challenge.txt"
+	var path string = "/home/okoenig/private_code_projects/advent-of-code-2022-go/day-1/data/challenge.txt"
 	file, err := os.ReadFile(path)
 
 	// Panic if reading file failed
