@@ -3,6 +3,7 @@ package main
 import (
 	"strconv"
 	"strings"
+	"sync"
 )
 
 type Section struct {
@@ -17,7 +18,9 @@ func newSection(section string) *Section {
 	return &Section{min: firstPair, max: secondPair}
 }
 
-func isFullOverlap(pair string, result chan int, strictOverlap bool) {
+func isFullOverlap(idx int, pair string, result chan int, strictOverlap bool, wg *sync.WaitGroup) {
+	defer wg.Done()
+
 	sections := strings.Split(pair, ",")
 	firstSection := newSection(sections[0])
 	secondSection := newSection(sections[1])
@@ -43,5 +46,6 @@ func isFullOverlap(pair string, result chan int, strictOverlap bool) {
 		resultAsInt = 0
 	}
 
-	result <- resultAsInt
+	result <- resultAsInt + <-result
+
 }
