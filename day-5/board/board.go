@@ -8,8 +8,8 @@ import (
 
 type Board []slots.Slot
 
-func (board *Board) MoveFigure(from_idx int, to_idx int) {
-	(*board)[to_idx].Push((*board)[from_idx].Pop())
+func (board *Board) MoveFigure(from_idx int, to_idx int, nItems int) {
+	(*board)[to_idx].Push((*board)[from_idx].Pop(nItems))
 }
 
 func (board *Board) ParseFromList(listOfBoardDescriptions []string, nCols int) {
@@ -20,7 +20,7 @@ func (board *Board) ParseFromList(listOfBoardDescriptions []string, nCols int) {
 				continue
 			}
 
-			(*board)[i].Push(string(item))
+			(*board)[i].Push([]string{string(item)})
 		}
 	}
 }
