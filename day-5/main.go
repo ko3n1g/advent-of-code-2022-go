@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	board "github.com/ko3n1g/advent-of-code-2022-go/day-5/board"
+	cratemovers "github.com/ko3n1g/advent-of-code-2022-go/day-5/crateMovers"
 	"github.com/ko3n1g/advent-of-code-2022-go/day-5/slots"
 )
 
@@ -16,7 +17,7 @@ func ReverseSlice[T comparable](s []T) {
 	})
 }
 
-func playGame(myBoard board.Board, instructions []string) {
+func playGame(myBoard board.Board, instructions []string, operator cratemovers.CrateMover) {
 	for _, move := range instructions {
 		fmt.Println(move)
 		var (
@@ -28,8 +29,15 @@ func playGame(myBoard board.Board, instructions []string) {
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "Fscanf: %v\n", err)
 		}
-		for i := 0; i < quantity; i++ {
-			myBoard.MoveFigure(from_idx-1, to_idx-1)
+
+		if operator == cratemovers.CrateMover9000 {
+			for i := 0; i < quantity; i++ {
+				myBoard.MoveFigure(from_idx-1, to_idx-1, 1)
+			}
+		} else if operator == cratemovers.CrateMover9001 {
+			myBoard.MoveFigure(from_idx-1, to_idx-1, quantity)
+		} else {
+			panic("Ain't don't dat cratemover :/")
 		}
 		fmt.Println(myBoard)
 		fmt.Println()
@@ -56,12 +64,12 @@ func main() {
 	var myBoard board.Board = make([]slots.Slot, numCols)
 	myBoard.ParseFromList(boardDescription, numCols)
 
-	playGame(myBoard, instructions)
+	playGame(myBoard, instructions, cratemovers.CrateMover9001)
 
 	fmt.Printf("\nFinal solution:\n")
 	var solution string = ""
 	for i := 0; i < numCols; i++ {
-		solution += myBoard[i].Pop()
+		solution += myBoard[i].Pop(1)[0]
 	}
 	fmt.Println(solution)
 }
