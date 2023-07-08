@@ -1,4 +1,4 @@
-package cratemovers
+package crateMovers
 
 type CrateMover int64
 
